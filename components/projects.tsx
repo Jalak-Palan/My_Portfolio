@@ -3,89 +3,87 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { ExternalLink, Github, ChevronDown } from "lucide-react"
+import { ExternalLink, Github, ChevronDown, Diamond } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const projects = [
   {
-    number: "01",
     title: "WebCraft",
     category: "SaaS Platform",
     description: "A no-code website builder that enables users to create stunning websites with drag-and-drop functionality and AI-powered design suggestions.",
-    features: ["Drag & Drop Editor", "AI Design Assistant", "Custom Domains", "SEO Optimization"],
+    features: [
+      "Drag & Drop Editor",
+      "AI Design Assistant",
+      "Custom Domains",
+      "SEO Optimization"
+    ],
     techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Stripe"],
     liveUrl: "#",
     sourceUrl: "#",
-    image: "from-violet-600 to-indigo-600"
+    image: "/projects/webcraft.png"
   },
   {
-    number: "02",
     title: "Safecoast",
     category: "Security Platform",
     description: "An AI-powered coastal monitoring system that uses satellite imagery and ML models to detect and predict environmental threats.",
-    features: ["Real-time Monitoring", "ML Predictions", "Alert System", "Data Visualization"],
-    techStack: ["Python", "TensorFlow", "React", "FastAPI", "AWS"],
+    features: [
+      "Real-time Monitoring",
+      "ML Predictions",
+      "Alert System",
+      "Data Visualization"
+    ],
+    techStack: ["Python", "Scikit-learn", "Pandas", "NumPy", "NLTK", "Matplotlib"],
     liveUrl: "#",
     sourceUrl: "#",
-    image: "from-cyan-600 to-blue-600"
+    image: "/projects/safecoast.png"
   },
   {
-    number: "03",
     title: "Spam Detection",
     category: "ML Application",
-    description: "A machine learning model that accurately detects and filters spam messages with 99% accuracy using NLP techniques.",
-    features: ["NLP Processing", "Real-time Detection", "API Integration", "Custom Training"],
-    techStack: ["Python", "scikit-learn", "Flask", "Docker", "Redis"],
+    description: "A machine learning model that accurately detects and filters spam messages with high accuracy using NLP techniques.",
+    features: [
+      "NLP Processing",
+      "Real-time Detection",
+      "API Integration",
+      "Custom Training"
+    ],
+    techStack: ["Python", "Scikit-learn", "Pandas", "NumPy", "NLTK", "Matplotlib"],
     liveUrl: "#",
     sourceUrl: "#",
-    image: "from-orange-600 to-red-600"
-  },
-  {
-    number: "04",
-    title: "Moungiri Store",
-    category: "E-commerce",
-    description: "A modern e-commerce platform with seamless payment integration, inventory management, and analytics dashboard.",
-    features: ["Payment Gateway", "Inventory System", "Order Tracking", "Admin Dashboard"],
-    techStack: ["Next.js", "Stripe", "MongoDB", "Tailwind", "Vercel"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    image: "from-emerald-600 to-teal-600"
-  },
-  {
-    number: "05",
-    title: "Devory",
-    category: "AI Assistant",
-    description: "An AI-powered development assistant that helps developers write, review, and debug code with intelligent suggestions.",
-    features: ["Code Generation", "Bug Detection", "Code Review", "Documentation"],
-    techStack: ["OpenAI", "LangChain", "Next.js", "Python", "PostgreSQL"],
-    liveUrl: "#",
-    sourceUrl: "#",
-    image: "from-purple-600 to-pink-600"
+    image: "/projects/spam.png"
   },
 ]
 
 const hiddenProjects = [
   {
-    number: "06",
-    title: "TaskFlow",
-    category: "Productivity",
-    description: "A collaborative project management tool with real-time updates, Kanban boards, and team analytics.",
-    features: ["Real-time Sync", "Kanban Boards", "Team Chat", "Analytics"],
-    techStack: ["React", "Socket.io", "Node.js", "MongoDB", "Docker"],
+    title: "Moungiri Store",
+    category: "E-commerce",
+    description: "A modern e-commerce platform with seamless payment integration, inventory management, and analytics dashboard.",
+    features: [
+      "Payment Gateway",
+      "Inventory System",
+      "Order Tracking",
+      "Admin Dashboard"
+    ],
+    techStack: ["Next.js", "Stripe", "MongoDB", "Tailwind", "Vercel"],
     liveUrl: "#",
     sourceUrl: "#",
-    image: "from-amber-600 to-yellow-600"
+    image: "/projects/moungiri.png"
   },
   {
-    number: "07",
-    title: "HealthTrack",
-    category: "Healthcare",
-    description: "A comprehensive health monitoring application with wearable integration and AI-powered health insights.",
-    features: ["Wearable Sync", "Health Insights", "Appointment Booking", "Prescription Management"],
-    techStack: ["React Native", "Node.js", "PostgreSQL", "TensorFlow", "AWS"],
+    title: "Devory",
+    category: "AI Assistant",
+    description: "An AI-powered development assistant that helps developers write, review, and debug code with intelligent suggestions.",
+    features: [
+      "Code Generation",
+      "Bug Detection",
+      "Code Review",
+      "Documentation"
+    ],
+    techStack: ["OpenAI", "LangChain", "Next.js", "Python", "PostgreSQL"],
     liveUrl: "#",
     sourceUrl: "#",
-    image: "from-rose-600 to-red-600"
+    image: "/projects/devory.png"
   },
 ]
 
@@ -98,42 +96,25 @@ export function Projects() {
 
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-16"
         >
+          <span className="text-[#f43f5e] text-sm uppercase tracking-[0.3em] mb-4 block">My Work</span>
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Featured{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Projects
-            </span>
+            <span className="text-white">Featured </span>
+            <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-[#737373] text-lg max-w-2xl mx-auto">
             A selection of projects that showcase my skills and passion for building
           </p>
         </motion.div>
 
-        {/* Stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex justify-center gap-8 mb-12 text-muted-foreground"
-        >
-          <span>5 Projects</span>
-          <span className="text-primary">|</span>
-          <span>15+ Technologies</span>
-          <span className="text-primary">|</span>
-          <span>4 Industries</span>
-        </motion.div>
-
-        {/* Projects grid */}
-        <div className="space-y-8">
+        {/* Projects */}
+        <div className="space-y-16">
           {displayedProjects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -142,60 +123,78 @@ export function Projects() {
               transition={{ duration: 0.5, delay: 0.1 * i }}
               className="group"
             >
-              <div className="grid lg:grid-cols-2 gap-8 bg-card/50 backdrop-blur-xl border border-border rounded-2xl p-6 lg:p-8 hover:border-primary/50 transition-all">
-                {/* Image placeholder */}
-                <div className={`relative aspect-video rounded-xl bg-gradient-to-br ${project.image} overflow-hidden order-1 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-6xl font-bold text-white/20">{project.number}</span>
-                  </div>
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                    <div className="flex gap-4">
-                      <Button asChild size="sm" className="bg-white text-black hover:bg-white/90">
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          View Live
-                        </a>
-                      </Button>
-                      <Button asChild size="sm" variant="outline" className="border-white text-white hover:bg-white/10">
-                        <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer">
-                          <Github className="w-4 h-4 mr-2" />
-                          Source
-                        </a>
-                      </Button>
+              <div className={`grid lg:grid-cols-2 gap-8 items-center ${i % 2 === 1 ? "lg:grid-flow-dense" : ""}`}>
+                {/* Image */}
+                <div className={`relative ${i % 2 === 1 ? "lg:col-start-2" : ""}`}>
+                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#141414] border border-[#262626]">
+                    {/* Placeholder gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f]" />
+                    {/* Browser mockup */}
+                    <div className="absolute top-0 left-0 right-0 h-8 bg-[#1a1a1a] border-b border-[#262626] flex items-center px-4 gap-2">
+                      <div className="w-3 h-3 rounded-full bg-[#ef4444]" />
+                      <div className="w-3 h-3 rounded-full bg-[#eab308]" />
+                      <div className="w-3 h-3 rounded-full bg-[#22c55e]" />
+                    </div>
+                    {/* Project preview placeholder */}
+                    <div className="absolute inset-8 top-12 bg-[#0f0f0f] rounded-lg flex items-center justify-center">
+                      <span className="text-[#262626] text-6xl font-bold">{project.title.charAt(0)}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className={`flex flex-col justify-center order-2 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-sm text-muted-foreground font-mono">{project.number}/05</span>
-                    <span className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full">
-                      {project.category}
-                    </span>
+                <div className={`space-y-4 ${i % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
+                  <div className="flex items-center gap-3">
+                    <Diamond className="w-4 h-4 text-[#f43f5e]" />
+                    <span className="text-[#f43f5e] text-sm font-medium">{project.category}</span>
                   </div>
-                  <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-3">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
+                  
+                  <h3 className="text-3xl font-bold text-white">{project.title}</h3>
+                  <p className="text-[#737373] leading-relaxed">{project.description}</p>
 
                   {/* Features */}
-                  <ul className="grid grid-cols-2 gap-2 mb-4">
+                  <ul className="space-y-2">
                     {project.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                      <li key={feature} className="flex items-center gap-2 text-[#a3a3a3] text-sm">
+                        <div className="w-1.5 h-1.5 bg-[#22c55e] rounded-full" />
                         {feature}
                       </li>
                     ))}
                   </ul>
 
                   {/* Tech stack */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {project.techStack.map((tech) => (
-                      <span key={tech} className="px-3 py-1 text-xs bg-secondary text-muted-foreground rounded-full">
+                      <span 
+                        key={tech} 
+                        className="px-3 py-1.5 text-xs bg-[#1a1a1a] text-[#a3a3a3] rounded-full border border-[#262626]"
+                      >
                         {tech}
                       </span>
                     ))}
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex gap-3 pt-4">
+                    <Button 
+                      asChild 
+                      className="bg-[#f43f5e] hover:bg-[#e11d48] text-white rounded-lg"
+                    >
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                        View Live
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                      </a>
+                    </Button>
+                    <Button 
+                      asChild 
+                      variant="outline"
+                      className="bg-[#1a1a1a] hover:bg-[#262626] border-[#262626] text-white rounded-lg"
+                    >
+                      <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer">
+                        Source Code
+                        <Github className="w-4 h-4 ml-2" />
+                      </a>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -208,17 +207,18 @@ export function Projects() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
-          className="text-center mt-12"
+          className="text-center mt-16"
         >
-          <Button
-            variant="outline"
-            size="lg"
+          <button
             onClick={() => setShowMore(!showMore)}
-            className="border-border hover:border-primary/50"
+            className="group flex flex-col items-center gap-2 mx-auto"
           >
-            {showMore ? "Show Less" : "Explore 2 More Projects"}
-            <ChevronDown className={`w-4 h-4 ml-2 transition-transform ${showMore ? "rotate-180" : ""}`} />
-          </Button>
+            <span className="text-[#f43f5e] text-sm uppercase tracking-wider">
+              {showMore ? "Show Less" : `Explore ${hiddenProjects.length} More Projects`}
+            </span>
+            <ChevronDown className={`w-6 h-6 text-[#f43f5e] transition-transform ${showMore ? "rotate-180" : "animate-bounce"}`} />
+            <span className="text-[#525252] text-xs">Click to reveal more innovative projects</span>
+          </button>
         </motion.div>
       </div>
     </section>

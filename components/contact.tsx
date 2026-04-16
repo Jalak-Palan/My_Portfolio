@@ -2,198 +2,134 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
+import { useRef } from "react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-
-const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "hello@rameshwarbhagwat.me",
-    href: "mailto:hello@rameshwarbhagwat.me"
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+91 98765 43210",
-    href: "tel:+919876543210"
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "India",
-    href: "#"
-  },
-  {
-    icon: Clock,
-    label: "Availability",
-    value: "Available for projects",
-    href: "#",
-    status: true
-  },
-]
 
 export function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setFormState({ name: "", email: "", subject: "", message: "" })
-    alert("Message sent successfully!")
-  }
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      {/* Globe wireframe background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="relative w-[800px] h-[800px] opacity-40">
+          <svg viewBox="0 0 400 400" className="w-full h-full">
+            {/* Horizontal lines */}
+            {[...Array(10)].map((_, i) => (
+              <ellipse
+                key={`h-${i}`}
+                cx="200"
+                cy="200"
+                rx="180"
+                ry={20 + i * 18}
+                fill="none"
+                stroke="url(#blueGradient)"
+                strokeWidth="0.3"
+                transform={`rotate(${i * 18} 200 200)`}
+                opacity="0.4"
+              />
+            ))}
+            {/* Vertical lines */}
+            {[...Array(16)].map((_, i) => (
+              <ellipse
+                key={`v-${i}`}
+                cx="200"
+                cy="200"
+                rx="180"
+                ry="180"
+                fill="none"
+                stroke="url(#blueGradient)"
+                strokeWidth="0.3"
+                transform={`rotate(${i * 11.25} 200 200)`}
+                opacity="0.3"
+              />
+            ))}
+            {/* Main circle */}
+            <circle
+              cx="200"
+              cy="200"
+              r="180"
+              fill="none"
+              stroke="url(#blueGradient)"
+              strokeWidth="0.5"
+              opacity="0.5"
+            />
+            {/* Glowing dots */}
+            {[...Array(30)].map((_, i) => {
+              const angle = (i / 30) * Math.PI * 2
+              const radius = 180
+              const x = 200 + Math.cos(angle) * radius
+              const y = 200 + Math.sin(angle) * radius
+              return (
+                <circle
+                  key={`dot-${i}`}
+                  cx={x}
+                  cy={y}
+                  r="1.5"
+                  fill="#3b82f6"
+                  opacity="0.6"
+                />
+              )
+            })}
+            <defs>
+              <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="100%" stopColor="#22d3ee" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            {"Let's"} Build Something{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Extraordinary
-            </span>
+          <span className="text-[#f43f5e] text-sm uppercase tracking-[0.3em] mb-4 block">Get In Touch</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="text-white">{"LET'S"} BUILD SOMETHING</span>
+            <br />
+            <span className="gradient-text-rainbow">EXTRAORDINARY</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Have a project in mind? {"Let's"} discuss how we can work together to bring your ideas to life.
+          <p className="text-[#a3a3a3] text-lg max-w-2xl mx-auto mb-8">
+            {"Whether you're launching a startup or scaling an enterprise, I'm here to turn your vision into reality"}
           </p>
-        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
           >
-            {contactInfo.map((info, i) => (
-              <motion.a
-                key={info.label}
-                href={info.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.3 + i * 0.1 }}
-                className="flex items-center gap-4 p-4 bg-card/50 backdrop-blur-xl border border-border rounded-xl hover:border-primary/50 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <info.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm text-muted-foreground">{info.label}</p>
-                  <p className="text-foreground font-medium">{info.value}</p>
-                </div>
-                {info.status && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-xs text-green-500">Available</span>
-                  </div>
-                )}
-              </motion.a>
-            ))}
+            <Button
+              asChild
+              size="lg"
+              className="bg-[#262626] hover:bg-[#333333] text-white rounded-full px-8 py-6 text-base font-medium"
+            >
+              <a href="mailto:hello@rameshwarbhagwat.me" className="flex items-center gap-2">
+                Get in Touch
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </Button>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-16 space-y-4"
           >
-            <form onSubmit={handleSubmit} className="bg-card/50 backdrop-blur-xl border border-border rounded-2xl p-6 lg:p-8 space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm text-foreground font-medium">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    placeholder="John Doe"
-                    value={formState.name}
-                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    required
-                    className="bg-secondary/50 border-border focus:border-primary"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm text-foreground font-medium">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={formState.email}
-                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    required
-                    className="bg-secondary/50 border-border focus:border-primary"
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm text-foreground font-medium">
-                  Subject
-                </label>
-                <Input
-                  id="subject"
-                  placeholder="Project Inquiry"
-                  value={formState.subject}
-                  onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                  required
-                  className="bg-secondary/50 border-border focus:border-primary"
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm text-foreground font-medium">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  placeholder="Tell me about your project..."
-                  value={formState.message}
-                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                  required
-                  rows={5}
-                  className="bg-secondary/50 border-border focus:border-primary resize-none"
-                />
-              </div>
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  "Sending..."
-                ) : (
-                  <>
-                    Send Message
-                    <Send className="w-4 h-4 ml-2" />
-                  </>
-                )}
-              </Button>
-            </form>
+            <h3 className="text-white text-lg font-semibold">
+              Available for full-time roles and selective freelance projects.
+            </h3>
+            <p className="text-[#737373]">
+              I focus on shipping clean, scalable web solutions that support real users and growing products.
+            </p>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

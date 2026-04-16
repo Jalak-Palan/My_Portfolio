@@ -3,59 +3,47 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { Code2, Brain, Palette, Rocket, Server, ChevronRight, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Code2, Palette, MessageSquare, ChevronDown, ChevronUp, Check, Clock, Target } from "lucide-react"
 
 const services = [
   {
     icon: Code2,
-    title: "Full Stack Development",
-    subtitle: "End-to-End Solutions",
-    years: "5+",
-    projects: "30+",
-    description: "Building complete web applications from frontend to backend, ensuring seamless integration and optimal performance across all layers.",
-    techStack: ["React", "Next.js", "Node.js", "PostgreSQL", "MongoDB"],
-    highlights: ["Scalable Architecture", "RESTful APIs", "Real-time Features", "Cloud Deployment"]
-  },
-  {
-    icon: Brain,
-    title: "AI Integration",
-    subtitle: "Intelligent Systems",
-    years: "3+",
-    projects: "15+",
-    description: "Integrating AI and machine learning capabilities into applications, from chatbots to predictive analytics and automation.",
-    techStack: ["Python", "TensorFlow", "OpenAI", "LangChain", "RAG"],
-    highlights: ["LLM Integration", "NLP Solutions", "Predictive Models", "AI Automation"]
+    title: "Full Stack Web Development",
+    description: "Building robust, scalable web applications from database design to deployment",
+    techStack: ["Next.js", "TypeScript", "Node.js", "Tailwind"],
+    highlights: [
+      "Custom web application development",
+      "API design and integration",
+      "Real-time features with WebSockets",
+      "Database optimization & query performance"
+    ],
+    stats: { years: "3+", projects: "6+" }
   },
   {
     icon: Palette,
-    title: "Creative Development",
-    subtitle: "Stunning Interfaces",
-    years: "5+",
-    projects: "40+",
-    description: "Crafting beautiful, responsive, and interactive user interfaces with attention to detail and user experience.",
-    techStack: ["Tailwind CSS", "Framer Motion", "Three.js", "GSAP", "Figma"],
-    highlights: ["Animations", "3D Graphics", "Responsive Design", "Accessibility"]
+    title: "Modern Frontend Engineering",
+    description: "Crafting pixel-perfect, responsive interfaces that engage and convert",
+    techStack: ["React", "Framer Motion", "Tailwind CSS", "TypeScript"],
+    highlights: [
+      "Component-driven architecture",
+      "Performance-optimized SPAs",
+      "Accessibility-first development",
+      "Interactive animations & micro-interactions"
+    ],
+    stats: { years: "3+", projects: "6+" }
   },
   {
-    icon: Rocket,
-    title: "SaaS Platforms",
-    subtitle: "Product Building",
-    years: "3+",
-    projects: "10+",
-    description: "Developing scalable SaaS products with subscription management, multi-tenancy, and enterprise-grade features.",
-    techStack: ["Stripe", "Auth.js", "Prisma", "Redis", "Docker"],
-    highlights: ["Payment Integration", "User Management", "Analytics", "Multi-tenant"]
-  },
-  {
-    icon: Server,
-    title: "API Development",
-    subtitle: "Backend Systems",
-    years: "5+",
-    projects: "25+",
-    description: "Designing and building robust APIs that power applications with security, documentation, and performance in mind.",
-    techStack: ["Express", "FastAPI", "GraphQL", "REST", "WebSockets"],
-    highlights: ["API Design", "Authentication", "Rate Limiting", "Documentation"]
+    icon: MessageSquare,
+    title: "AI Integration & Automation",
+    description: "Implementing intelligent solutions that automate and enhance user experiences",
+    techStack: ["Python", "OpenAI", "LangChain", "RAG"],
+    highlights: [
+      "Custom AI chatbots & assistants",
+      "NLP and text processing pipelines",
+      "Workflow automation systems",
+      "AI-powered analytics dashboards"
+    ],
+    stats: { years: "2+", projects: "4+" }
   },
 ]
 
@@ -66,115 +54,107 @@ export function Skills() {
 
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            My{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Expertise
-            </span>
+          <span className="text-[#f43f5e] text-sm uppercase tracking-wider mb-2 block">What I Do</span>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
+            My Services
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Specialized skills and services I bring to every project
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * i }}
-              className="group relative"
+              className="group"
             >
-              {/* Card */}
               <div 
-                className={`relative bg-card/50 backdrop-blur-xl border border-border rounded-2xl p-6 cursor-pointer transition-all duration-300 ${
-                  expandedCard === i 
-                    ? "ring-2 ring-primary shadow-lg shadow-primary/20" 
-                    : "hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
+                className={`bg-[#141414] border border-[#262626] rounded-2xl overflow-hidden transition-all duration-300 ${
+                  expandedCard === i ? "ring-1 ring-[#f43f5e]/30" : "hover:border-[#333333]"
                 }`}
-                onClick={() => setExpandedCard(expandedCard === i ? null : i)}
               >
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                <div className="relative z-10">
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <service.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <span className="text-xs text-accent font-medium px-2 py-1 bg-accent/10 rounded-full">
-                      {service.subtitle}
-                    </span>
+                {/* Main content */}
+                <div className="p-6">
+                  <div className="w-12 h-12 rounded-xl bg-[#1a1a1a] flex items-center justify-center mb-4 border border-[#262626]">
+                    <service.icon className="w-6 h-6 text-[#f43f5e]" />
                   </div>
 
-                  <h3 className="text-xl font-bold text-foreground mb-2">{service.title}</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
+                  <p className="text-[#737373] text-sm mb-4">{service.description}</p>
                   
-                  {/* Stats */}
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                    <span>{service.years} years</span>
-                    <span className="w-1 h-1 bg-muted-foreground rounded-full" />
-                    <span>{service.projects} projects</span>
+                  {/* Tech stack pills */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {service.techStack.map((tech) => (
+                      <span 
+                        key={tech} 
+                        className="px-2.5 py-1 text-xs bg-[#1a1a1a] text-[#a3a3a3] rounded-md border border-[#262626]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
 
-                  {/* Expand indicator */}
-                  <div className="flex items-center text-primary text-sm">
-                    <span>Learn more</span>
-                    <ChevronRight className={`w-4 h-4 ml-1 transition-transform ${expandedCard === i ? "rotate-90" : ""}`} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Expanded content */}
-              {expandedCard === i && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute top-full left-0 right-0 mt-2 z-50 bg-card border border-border rounded-2xl p-6 shadow-2xl"
-                >
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); setExpandedCard(null); }}
-                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+                  {/* Expand button */}
+                  <button
+                    onClick={() => setExpandedCard(expandedCard === i ? null : i)}
+                    className="flex items-center gap-2 text-[#f43f5e] text-sm font-medium hover:text-[#fb7185] transition-colors"
                   >
-                    <X className="w-5 h-5" />
+                    {expandedCard === i ? (
+                      <>
+                        Show Less <ChevronUp className="w-4 h-4" />
+                      </>
+                    ) : (
+                      <>
+                        Learn More <ChevronDown className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
-                  
-                  <p className="text-muted-foreground mb-4">{service.description}</p>
-                  
-                  <div className="mb-4">
-                    <h4 className="text-sm font-medium text-foreground mb-2">Tech Stack</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {service.techStack.map((tech) => (
-                        <span key={tech} className="px-2 py-1 text-xs bg-secondary rounded-md text-muted-foreground">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                </div>
 
-                  <div>
-                    <h4 className="text-sm font-medium text-foreground mb-2">Key Highlights</h4>
-                    <ul className="space-y-1">
+                {/* Expanded content */}
+                {expandedCard === i && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="border-t border-[#262626] p-6 bg-[#0f0f0f]"
+                  >
+                    <h4 className="text-white text-sm font-medium mb-3">Key Highlights</h4>
+                    <ul className="space-y-2 mb-4">
                       {service.highlights.map((highlight) => (
-                        <li key={highlight} className="text-sm text-muted-foreground flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        <li key={highlight} className="flex items-start gap-2 text-sm text-[#a3a3a3]">
+                          <Check className="w-4 h-4 text-[#22c55e] mt-0.5 flex-shrink-0" />
                           {highlight}
                         </li>
                       ))}
                     </ul>
-                  </div>
-                </motion.div>
-              )}
+
+                    <div className="flex gap-4 pt-4 border-t border-[#262626]">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-[#3b82f6]" />
+                        <span className="text-white text-sm">{service.stats.years} Years</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Target className="w-4 h-4 text-[#22c55e]" />
+                        <span className="text-white text-sm">{service.stats.projects} Projects</span>
+                      </div>
+                    </div>
+
+                    <button className="mt-4 flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] border border-[#262626] rounded-lg text-[#a3a3a3] text-sm hover:text-white hover:border-[#333333] transition-colors">
+                      <MessageSquare className="w-4 h-4" />
+                      {"Let's discuss your project"}
+                    </button>
+                  </motion.div>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>
