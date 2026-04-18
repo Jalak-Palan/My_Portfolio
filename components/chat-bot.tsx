@@ -12,12 +12,32 @@ type Message = {
 
 const mockResponses: Record<string, React.ReactNode> = {
   "skills": (
-    <div className="space-y-2">
-      <p className="font-bold border-b border-white/10 pb-2 mb-2">Jalak's Tech Stack:</p>
-      <p>🎨 <strong>Frontend:</strong> React, Next.js, TypeScript, Tailwind CSS, Framer Motion</p>
-      <p>⚙️ <strong>Backend:</strong> Node.js, Express.js, TypeScript, PostgreSQL, MongoDB, Prisma</p>
-      <p>🤖 <strong>AI/ML:</strong> Python, LangChain, OpenAI API</p>
-      <p>☁️ <strong>Cloud/DevOps:</strong> AWS, Docker, Vercel, Linux</p>
+    <div className="space-y-3">
+      <p className="font-bold border-b border-white/10 pb-2 mb-2 text-[#c68a53]">Jalak's Core Competencies:</p>
+      <div className="grid grid-cols-1 gap-2 text-xs">
+        <div className="bg-[#1a1a1a] p-2 rounded-lg border border-[#333]">
+          <span className="block font-bold text-white mb-1">Frontend</span>
+          <p className="text-[#a3a3a3]">React, Next.js, TypeScript, Tailwind, Framer Motion</p>
+        </div>
+        <div className="bg-[#1a1a1a] p-2 rounded-lg border border-[#333]">
+          <span className="block font-bold text-white mb-1">Backend & DB</span>
+          <p className="text-[#a3a3a3]">Node.js, Express, PostgreSQL, MongoDB, Prisma</p>
+        </div>
+        <div className="bg-[#1a1a1a] p-2 rounded-lg border border-[#333]">
+          <span className="block font-bold text-white mb-1">Cloud & Tools</span>
+          <p className="text-[#a3a3a3]">AWS, Docker, Git, Linux, Vercel</p>
+        </div>
+      </div>
+      <button 
+        onClick={() => {
+          document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+          // Update URL to clean path as per previous requirement
+          window.history.pushState(null, "", "/skills");
+        }}
+        className="w-full mt-2 py-2 bg-[#c68a53] hover:bg-[#b57a42] text-white rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2"
+      >
+        View Full Skills Section ↗
+      </button>
     </div>
   ),
   "frontend": (
@@ -145,8 +165,11 @@ export function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed bottom-6 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[400px] h-[600px] max-h-[85vh] bg-[#111111] border border-[#262626] rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-6 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[400px] h-[600px] max-h-[85vh] bg-[#111111]/95 backdrop-blur-xl border border-[#262626] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden"
           >
+            {/* Background shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#c68a53]/5 via-transparent to-transparent pointer-events-none" />
+            
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-[#262626] bg-[#161616]">
               <div className="flex items-center gap-3">
@@ -219,20 +242,21 @@ export function ChatBot() {
                 ))}
               </div>
 
-              {/* Input Area */}
-              <div className="relative flex items-center">
+              {/* Input Area (Highlighted Search Bar) */}
+              <div className="relative flex items-center group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-[#c68a53]/0 via-[#c68a53]/20 to-[#c68a53]/0 rounded-full blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
                 <input
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Message..."
-                  className="w-full bg-[#0a0a0a] border border-[#333] text-white rounded-full pl-5 pr-12 py-3 text-sm focus:outline-none focus:border-[#444] transition-colors"
+                  placeholder="Ask me anything..."
+                  className="relative w-full bg-[#0a0a0a] border border-[#333] group-focus-within:border-[#c68a53]/50 text-white rounded-full pl-5 pr-12 py-3.5 text-sm focus:outline-none transition-all shadow-inner"
                 />
                 <button
                   onClick={() => handleSend(inputValue)}
                   disabled={!inputValue.trim() || isTyping}
-                  className="absolute right-2 w-8 h-8 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-[#a3a3a3] hover:text-white hover:bg-[#c68a53] hover:border-[#c68a53] disabled:opacity-50 disabled:hover:bg-[#1a1a1a] disabled:hover:text-[#a3a3a3] disabled:hover:border-[#333] transition-all"
+                  className="absolute right-2 w-10 h-10 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-[#a3a3a3] hover:text-white hover:bg-[#c68a53] group-focus-within:bg-[#c68a53] group-focus-within:text-white hover:border-[#c68a53] disabled:opacity-50 disabled:hover:bg-[#1a1a1a] transition-all"
                 >
                   <Send className="w-4 h-4 ml-0.5" />
                 </button>

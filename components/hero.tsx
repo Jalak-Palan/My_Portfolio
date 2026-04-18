@@ -90,9 +90,12 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="bg-gradient-to-r from-[#f43f5e] to-[#ec4899] hover:from-[#e11d48] hover:to-[#db2777] text-white rounded-full px-8 py-6 text-base font-medium"
+              className="bg-gradient-to-r from-[#f43f5e] to-[#ec4899] hover:from-[#e11d48] hover:to-[#db2777] text-white rounded-full px-8 py-6 text-base font-medium cursor-pointer"
             >
-              <a href="#projects" className="flex items-center gap-2">
+              <a onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }} className="flex items-center gap-2">
                 View My Work
                 <ArrowRight className="w-4 h-4" />
               </a>

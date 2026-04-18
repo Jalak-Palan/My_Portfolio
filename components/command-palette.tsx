@@ -48,7 +48,10 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Type a command or search..." />
+      <div className="relative group">
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#c68a53]/20 via-[#c68a53]/40 to-[#c68a53]/20 rounded-t-lg blur opacity-50 group-focus-within:opacity-100 transition-opacity duration-500" />
+        <CommandInput placeholder="Type a command or search..." className="relative border-none focus:ring-0" />
+      </div>
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Navigation">

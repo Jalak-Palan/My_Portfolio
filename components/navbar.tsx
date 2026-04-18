@@ -36,7 +36,12 @@ export function Navbar() {
         if (element) {
           const rect = element.getBoundingClientRect()
           if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section)
+            if (activeSection !== section) {
+              setActiveSection(section)
+              // Update URL without hash, using replaceState to avoid cluttering history
+              const path = section === "home" ? "/" : `/${section}`
+              window.history.replaceState(null, "", path)
+            }
             break
           }
         }
@@ -44,6 +49,35 @@ export function Navbar() {
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Global Hashtag Interceptor to remove all '#' from routes
+  useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      const anchor = target.closest("a")
+      
+      if (anchor && anchor.hash && anchor.hash.startsWith("#") && anchor.origin === window.location.origin) {
+        // Find the target element
+        const targetId = anchor.hash.slice(1)
+        const targetElement = document.getElementById(targetId)
+        
+        if (targetElement) {
+          e.preventDefault()
+          targetElement.scrollIntoView({ behavior: "smooth" })
+          
+          // Update to clean path
+          const path = targetId === "home" ? "/" : `/${targetId}`
+          window.history.pushState(null, "", path)
+
+          // Ensure the mobile menu closes if a link was clicked inside it
+          setIsMobileMenuOpen(false)
+        }
+      }
+    }
+
+    window.addEventListener("click", handleGlobalClick)
+    return () => window.removeEventListener("click", handleGlobalClick)
   }, [])
 
   useEffect(() => {
@@ -62,9 +96,20 @@ export function Navbar() {
     const target = document.querySelector(href)
     if (target) {
       target.scrollIntoView({ behavior: "smooth" })
+      // Update to clean path
+      const targetId = href.replace("#", "")
+      const path = targetId === "home" ? "/" : `/${targetId}`
+      window.history.pushState(null, "", path)
     }
     setIsMobileMenuOpen(false)
   }
+
+  // Clear hash on initial load if present
+  useEffect(() => {
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname)
+    }
+  }, [])
 
   return (
     <>
