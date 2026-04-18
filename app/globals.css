@@ -3,7 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
+/* ── DARK (default) ── */
+:root,
+[data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ffffff;
   --card: #141414;
@@ -23,6 +25,54 @@
   --border: #262626;
   --input: #1a1a1a;
   --ring: #f43f5e;
+  --radius: 0.75rem;
+}
+
+/* ── LIGHT ── */
+[data-theme="light"] {
+  --background: #f8f8f8;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #f43f5e;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f0f0;
+  --secondary-foreground: #0a0a0a;
+  --muted: #e8e8e8;
+  --muted-foreground: #555555;
+  --accent: #f97316;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e0e0e0;
+  --input: #efefef;
+  --ring: #f43f5e;
+  --radius: 0.75rem;
+}
+
+/* ── RED ── */
+[data-theme="red"] {
+  --background: #0d0000;
+  --foreground: #ffffff;
+  --card: #1a0505;
+  --card-foreground: #ffffff;
+  --popover: #1a0505;
+  --popover-foreground: #ffffff;
+  --primary: #ef0000;
+  --primary-foreground: #ffffff;
+  --secondary: #2a0808;
+  --secondary-foreground: #ffffff;
+  --muted: #3a0c0c;
+  --muted-foreground: #cc8888;
+  --accent: #ff4444;
+  --accent-foreground: #ffffff;
+  --destructive: #ff2222;
+  --destructive-foreground: #ffffff;
+  --border: #3a0c0c;
+  --input: #2a0808;
+  --ring: #ef0000;
   --radius: 0.75rem;
 }
 

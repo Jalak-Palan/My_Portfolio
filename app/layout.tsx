@@ -32,6 +32,9 @@ export const metadata: Metadata = {
   },
 }
 
+import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeSwitcher } from '@/components/theme-switcher'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,7 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased bg-background text-foreground" suppressHydrationWarning>
-        {children}
+        <ThemeProvider>
+          {children}
+          <ThemeSwitcher />
+        </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
