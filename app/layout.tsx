@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   title: 'Jalak Palan | Full Stack & AI Developer',
   description: 'Full Stack & AI Developer crafting AI-powered platforms that elevate SaaS & Web Innovators',
   generator: 'Next.js',
+  icons: {
+    icon: '/jp-logo.png',
+    apple: '/jp-logo.png',
+  },
 }
 
 import { ThemeProvider } from '@/components/theme-provider'

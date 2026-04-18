@@ -56,16 +56,16 @@ export function Navbar() {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const anchor = target.closest("a")
-      
+
       if (anchor && anchor.hash && anchor.hash.startsWith("#") && anchor.origin === window.location.origin) {
         // Find the target element
         const targetId = anchor.hash.slice(1)
         const targetElement = document.getElementById(targetId)
-        
+
         if (targetElement) {
           e.preventDefault()
           targetElement.scrollIntoView({ behavior: "smooth" })
-          
+
           // Update to clean path
           const path = targetId === "home" ? "/" : `/${targetId}`
           window.history.pushState(null, "", path)
@@ -129,20 +129,15 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <motion.a
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
-              window.history.pushState(null, "", "/");
-            }}
-            className="relative z-10 flex items-center cursor-pointer"
+            href="#home"
+            onClick={(e) => scrollToSection(e, "#home")}
+            className="relative z-10 flex items-center"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden p-0.5">
-              <img 
-                src="/jp-logo.png" 
-                alt="JP Logo" 
-                className="w-full h-full object-cover rounded-full"
-              />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+              <span className={`text-2xl font-extrabold tracking-tight text-white ${playfair.className}`}>
+                JP
+              </span>
             </div>
           </motion.a>
 
@@ -158,11 +153,10 @@ export function Navbar() {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => scrollToSection(e, link.href)}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-                        isActive 
-                          ? "bg-[#262626] text-white shadow-inner" 
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${isActive
+                          ? "bg-[#262626] text-white shadow-inner"
                           : "text-[#a3a3a3] hover:text-white hover:bg-[#262626]/50"
-                      }`}
+                        }`}
                     >
                       <Icon className={`w-4 h-4 transition-colors ${isActive ? "text-white" : link.iconColor}`} />
                       <span className="text-sm font-medium">{link.name}</span>
