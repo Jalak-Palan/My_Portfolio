@@ -44,6 +44,16 @@ const nextConfig = {
       'recharts',
     ],
   },
+  // Support clean URLs for our single page app
+  async rewrites() {
+    return [
+      { source: '/about', destination: '/' },
+      { source: '/skills', destination: '/' },
+      { source: '/projects', destination: '/' },
+      { source: '/certificates', destination: '/' },
+      { source: '/contact', destination: '/' },
+    ]
+  },
 }
 
 export default nextConfig

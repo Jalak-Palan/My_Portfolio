@@ -104,10 +104,18 @@ export function Navbar() {
     setIsMobileMenuOpen(false)
   }
 
-  // Clear hash on initial load if present
+  // Handle initial scroll based on path if refreshing a clean URL
   useEffect(() => {
-    if (window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname)
+    const path = window.location.pathname.replace("/", "")
+    if (path && path !== "") {
+      // Small timeout to ensure components are rendered
+      const timer = setTimeout(() => {
+        const target = document.getElementById(path)
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" })
+        }
+      }, 500)
+      return () => clearTimeout(timer)
     }
   }, [])
 
