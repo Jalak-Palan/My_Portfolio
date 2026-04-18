@@ -3,76 +3,76 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ── DARK (default) ── */
+/* ── DARK (default - Premium Mocha) ── */
 :root,
 [data-theme="dark"] {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --card: #141414;
-  --card-foreground: #ffffff;
-  --popover: #141414;
-  --popover-foreground: #ffffff;
-  --primary: #f43f5e;
+  --background: #130f0c;
+  --foreground: #f2e8de;
+  --card: #1c1613;
+  --card-foreground: #f2e8de;
+  --popover: #1c1613;
+  --popover-foreground: #f2e8de;
+  --primary: #c68a53;
   --primary-foreground: #ffffff;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ffffff;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --accent: #f97316;
-  --accent-foreground: #ffffff;
+  --secondary: #261f1b;
+  --secondary-foreground: #e6dfd7;
+  --muted: #302621;
+  --muted-foreground: #ad9a8b;
+  --accent: #d89f6b;
+  --accent-foreground: #1c1613;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #262626;
-  --input: #1a1a1a;
-  --ring: #f43f5e;
+  --border: #302621;
+  --input: #1c1613;
+  --ring: #c68a53;
   --radius: 0.75rem;
 }
 
-/* ── LIGHT ── */
+/* ── LIGHT (Latte / Beige) ── */
 [data-theme="light"] {
-  --background: #f8f8f8;
-  --foreground: #0a0a0a;
-  --card: #ffffff;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #f43f5e;
+  --background: #fbf8f5;
+  --foreground: #3a2b24;
+  --card: #f2ebe3;
+  --card-foreground: #3a2b24;
+  --popover: #f2ebe3;
+  --popover-foreground: #3a2b24;
+  --primary: #8c5a35;
   --primary-foreground: #ffffff;
-  --secondary: #f0f0f0;
-  --secondary-foreground: #0a0a0a;
-  --muted: #e8e8e8;
-  --muted-foreground: #555555;
-  --accent: #f97316;
+  --secondary: #e6dfd7;
+  --secondary-foreground: #4a372e;
+  --muted: #e2d8cd;
+  --muted-foreground: #877468;
+  --accent: #bf8252;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e0e0e0;
-  --input: #efefef;
-  --ring: #f43f5e;
+  --border: #dfcfc2;
+  --input: #f7f3ef;
+  --ring: #8c5a35;
   --radius: 0.75rem;
 }
 
-/* ── RED ── */
-[data-theme="red"] {
-  --background: #0d0000;
-  --foreground: #ffffff;
-  --card: #1a0505;
-  --card-foreground: #ffffff;
-  --popover: #1a0505;
-  --popover-foreground: #ffffff;
-  --primary: #ef0000;
+/* ── COLORFUL ── */
+[data-theme="colorful"] {
+  --background: #fdf4ff;
+  --foreground: #1e1b4b;
+  --card: #ffffff;
+  --card-foreground: #1e1b4b;
+  --popover: #ffffff;
+  --popover-foreground: #1e1b4b;
+  --primary: #d946ef;
   --primary-foreground: #ffffff;
-  --secondary: #2a0808;
-  --secondary-foreground: #ffffff;
-  --muted: #3a0c0c;
-  --muted-foreground: #cc8888;
-  --accent: #ff4444;
+  --secondary: #f3e8ff;
+  --secondary-foreground: #4c1d95;
+  --muted: #e2e8f0;
+  --muted-foreground: #64748b;
+  --accent: #06b6d4;
   --accent-foreground: #ffffff;
-  --destructive: #ff2222;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #3a0c0c;
-  --input: #2a0808;
-  --ring: #ef0000;
+  --border: #c7d2fe;
+  --input: #e0e7ff;
+  --ring: #d946ef;
   --radius: 0.75rem;
 }
 
@@ -110,7 +110,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-700 ease-in-out;
   }
 
   html {
@@ -120,21 +120,21 @@
 
 /* Custom gradient text */
 .gradient-text {
-  background: linear-gradient(90deg, #f43f5e 0%, #ec4899 50%, #f97316 100%);
+  background: linear-gradient(90deg, #d89f6b 0%, #c68a53 50%, #8c5a35 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-orange {
-  background: linear-gradient(90deg, #f97316 0%, #f43f5e 100%);
+  background: linear-gradient(90deg, #c68a53 0%, #8c5a35 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-rainbow {
-  background: linear-gradient(90deg, #f43f5e 0%, #ec4899 25%, #a855f7 50%, #22d3ee 75%, #22c55e 100%);
+  background: linear-gradient(90deg, #d89f6b 0%, #c68a53 25%, #8c5a35 50%, #d89f6b 75%, #c68a53 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -190,16 +190,16 @@
 
 /* Glow effects */
 .glow-orange {
-  box-shadow: 0 0 30px rgba(249, 115, 22, 0.5);
+  box-shadow: 0 0 30px rgba(198, 138, 83, 0.5);
 }
 
 .glow-pink {
-  box-shadow: 0 0 30px rgba(244, 63, 94, 0.5);
+  box-shadow: 0 0 30px rgba(140, 90, 53, 0.5);
 }
 
 /* Timeline line gradient */
 .timeline-line {
-  background: linear-gradient(180deg, #f97316 0%, #f43f5e 100%);
+  background: linear-gradient(180deg, #c68a53 0%, #8c5a35 100%);
 }
 
 /* Card hover effect — GPU-accelerated */
@@ -251,11 +251,11 @@
 
   0%,
   100% {
-    box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+    box-shadow: 0 0 10px rgba(198, 138, 83, 0.5);
   }
 
   50% {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.8);
+    box-shadow: 0 0 20px rgba(198, 138, 83, 0.8);
   }
 }
 

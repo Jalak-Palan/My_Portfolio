@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "dark" | "light" | "red"
+type Theme = "dark" | "light" | "colorful"
 
 interface ThemeContextValue {
   theme: Theme
@@ -20,7 +20,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Load persisted theme on mount
   useEffect(() => {
     const saved = localStorage.getItem("portfolio-theme") as Theme | null
-    if (saved && ["dark", "light", "red"].includes(saved)) {
+    if (saved && ["dark", "light", "colorful"].includes(saved)) {
       setThemeState(saved)
       document.documentElement.setAttribute("data-theme", saved)
     }

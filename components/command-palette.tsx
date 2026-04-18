@@ -9,20 +9,22 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
-import { Home, User, Code, Briefcase, Mail, Github, Linkedin, Twitter } from "lucide-react"
+import { Home, User, Code, Briefcase, Mail, Github, Linkedin, Twitter, Youtube, Award } from "lucide-react"
 
 const commands = [
   { name: "Home", href: "#home", icon: Home },
   { name: "About", href: "#about", icon: User },
   { name: "Skills", href: "#skills", icon: Code },
   { name: "Projects", href: "#projects", icon: Briefcase },
+  { name: "Certificates", href: "#certificates", icon: Award },
   { name: "Contact", href: "#contact", icon: Mail },
 ]
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/jalakpalan", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com/in/jalakpalan", icon: Linkedin },
-  { name: "Twitter", href: "https://twitter.com/jalakpalan", icon: Twitter },
+  { name: "GitHub", href: "https://github.com/Jalak-Palan", icon: Github },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/jalak-palan-726597367/", icon: Linkedin },
+  { name: "Twitter", href: "https://x.com/Jalak_Palan", icon: Twitter },
+  { name: "YouTube", href: "https://www.youtube.com/@JALAKPALAN-q8i", icon: Youtube },
 ]
 
 interface CommandPaletteProps {

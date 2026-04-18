@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Home, User, Code2, Briefcase, Mail, ChevronDown, Search } from "lucide-react"
+import { Menu, X, Home, User, Code2, Briefcase, Mail, ChevronDown, Search, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CommandPalette } from "./command-palette"
+import { ThemeSwitcher } from "./theme-switcher"
 import { Playfair_Display } from "next/font/google"
 
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["800"], style: ["italic"] })
@@ -14,6 +15,7 @@ const navLinks = [
   { name: "About", href: "#about", icon: User, hasDropdown: true, iconColor: "text-blue-500" },
   { name: "Skills", href: "#skills", icon: Code2, iconColor: "text-pink-500" },
   { name: "Work", href: "#projects", icon: Briefcase, iconColor: "text-orange-500" },
+  { name: "Certificates", href: "#certificates", icon: Award, iconColor: "text-amber-500" },
   { name: "Contact", href: "#contact", icon: Mail, iconColor: "text-green-500" },
 ]
 
@@ -28,7 +30,7 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 50)
 
       // Detect active section
-      const sections = ["home", "about", "skills", "projects", "contact"]
+      const sections = ["home", "about", "skills", "projects", "certificates", "contact"]
       for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
@@ -55,6 +57,15 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const target = document.querySelector(href)
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" })
+    }
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <>
       <motion.nav
@@ -66,6 +77,7 @@ export function Navbar() {
           {/* Logo */}
           <motion.a
             href="#home"
+            onClick={(e) => scrollToSection(e, "#home")}
             className="relative z-10 flex items-center"
             whileHover={{ scale: 1.05 }}
           >
@@ -87,6 +99,7 @@ export function Navbar() {
                     <a
                       key={link.name}
                       href={link.href}
+                      onClick={(e) => scrollToSection(e, link.href)}
                       className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
                         isActive 
                           ? "bg-[#262626] text-white shadow-inner" 
@@ -105,11 +118,12 @@ export function Navbar() {
 
           {/* Right side - Get in Touch button */}
           <div className="hidden md:flex items-center gap-4">
+            <ThemeSwitcher />
             <Button
               asChild
               className="bg-[#262626] hover:bg-[#333333] text-white rounded-full px-6"
             >
-              <a href="#contact" className="flex items-center gap-2">
+              <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")} className="flex items-center gap-2">
                 Get in Touch
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -119,14 +133,16 @@ export function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeSwitcher />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -145,8 +161,8 @@ export function Navbar() {
                     <a
                       key={link.name}
                       href={link.href}
+                      onClick={(e) => scrollToSection(e, link.href)}
                       className="flex items-center gap-3 text-[#a3a3a3] hover:text-white transition-colors py-3 px-4 rounded-xl hover:bg-[#1a1a1a]"
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <Icon className="w-5 h-5" />
                       {link.name}
@@ -154,7 +170,7 @@ export function Navbar() {
                   )
                 })}
                 <Button asChild className="w-full bg-[#262626] hover:bg-[#333333] mt-4 rounded-full">
-                  <a href="#contact">Get in Touch</a>
+                  <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")}>Get in Touch</a>
                 </Button>
               </div>
             </motion.div>
