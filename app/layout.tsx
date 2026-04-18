@@ -22,14 +22,6 @@ export const metadata: Metadata = {
   title: 'Jalak Palan | Full Stack & AI Developer',
   description: 'Full Stack & AI Developer crafting AI-powered platforms that elevate SaaS & Web Innovators',
   generator: 'Next.js',
-  icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
-  },
 }
 
 import { ThemeProvider } from '@/components/theme-provider'
