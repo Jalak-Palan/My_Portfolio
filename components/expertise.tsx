@@ -307,13 +307,13 @@ export function Expertise() {
                         <p className="text-xs text-zinc-400">Let's discuss your project</p>
                       </div>
                     </div>
-                    <a
-                      href="#contact"
-                      className="w-full sm:w-auto px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-sm font-semibold text-white transition-all flex items-center justify-center gap-2 group"
+                    <button
+                      onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('open-contact-modal')); }}
+                      className="w-full sm:w-auto px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-sm font-semibold text-white transition-all flex items-center justify-center gap-2 group cursor-pointer"
                     >
                       Get in Touch
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                    </button>
                   </div>
                 </div>
 

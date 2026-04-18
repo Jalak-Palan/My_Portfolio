@@ -2,6 +2,8 @@ import dynamic from "next/dynamic"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { InitialLoader } from "@/components/initial-loader"
+import { ChatBot } from "@/components/chat-bot"
+import { ContactModal } from "@/components/contact-modal"
 
 // Lazy-load all below-the-fold sections to improve LCP and reduce initial JS bundle
 const About        = dynamic(() => import("@/components/about").then(m => ({ default: m.About })))
@@ -29,6 +31,8 @@ export default function Home() {
       <Certificates />
       <Contact />
       <Footer />
+      <ChatBot />
+      <ContactModal />
     </main>
   )
 }

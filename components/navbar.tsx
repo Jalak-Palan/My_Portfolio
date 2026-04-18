@@ -121,9 +121,9 @@ export function Navbar() {
             <ThemeSwitcher />
             <Button
               asChild
-              className="bg-[#262626] hover:bg-[#333333] text-white rounded-full px-6"
+              className="bg-[#262626] hover:bg-[#333333] text-white rounded-full px-6 cursor-pointer"
             >
-              <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")} className="flex items-center gap-2">
+              <a onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('open-contact-modal')); }} className="flex items-center gap-2">
                 Get in Touch
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -169,8 +169,8 @@ export function Navbar() {
                     </a>
                   )
                 })}
-                <Button asChild className="w-full bg-[#262626] hover:bg-[#333333] mt-4 rounded-full">
-                  <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")}>Get in Touch</a>
+                <Button asChild className="w-full bg-[#262626] hover:bg-[#333333] mt-4 rounded-full cursor-pointer">
+                  <a onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('open-contact-modal')); setIsMobileMenuOpen(false); }}>Get in Touch</a>
                 </Button>
               </div>
             </motion.div>
@@ -191,12 +191,7 @@ export function Navbar() {
         </span>
       </button>
 
-      {/* Chat button - Fixed bottom right */}
-      <button className="fixed bottom-6 right-6 z-50 w-11 h-11 bg-[#1a1a1a]/80 backdrop-blur-xl border border-[#262626] rounded-full flex items-center justify-center text-[#a3a3a3] hover:text-white transition-colors">
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      </button>
+
 
       <CommandPalette open={isCommandOpen} onOpenChange={setIsCommandOpen} />
     </>

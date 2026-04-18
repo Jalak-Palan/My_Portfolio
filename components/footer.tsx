@@ -41,7 +41,8 @@ const socialLinks = [
   },
   { 
     name: "Email", 
-    href: "mailto:hello@jalakpalan.me",
+    href: "#contact",
+    onClick: (e: React.MouseEvent) => { e.preventDefault(); window.dispatchEvent(new Event('open-contact-modal')); },
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
         <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -69,8 +70,9 @@ export function Footer() {
                 <a
                   key={link.name}
                   href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={link.name === "Email" ? undefined : "_blank"}
+                  rel={link.name === "Email" ? undefined : "noopener noreferrer"}
+                  onClick={(link as any).onClick}
                   className="w-8 h-8 rounded-full bg-[#1a1a1a] border border-[#262626] flex items-center justify-center text-[#737373] hover:text-white hover:border-[#404040] transition-all"
                   aria-label={link.name}
                 >

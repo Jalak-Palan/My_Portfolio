@@ -101,9 +101,9 @@ export function Hero() {
               asChild
               variant="outline"
               size="lg"
-              className="bg-[#262626] hover:bg-[#333333] border-[#404040] text-white rounded-full px-8 py-6 text-base font-medium"
+              className="bg-[#262626] hover:bg-[#333333] border-[#404040] text-white rounded-full px-8 py-6 text-base font-medium cursor-pointer"
             >
-              <a href="#contact">Get In Touch</a>
+              <a onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('open-contact-modal')); }}>Get In Touch</a>
             </Button>
           </motion.div>
         </motion.div>

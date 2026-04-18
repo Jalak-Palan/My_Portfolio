@@ -35,6 +35,10 @@ interface CommandPaletteProps {
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const handleSelect = (href: string) => {
     onOpenChange(false)
+    if (href === "#contact") {
+      window.dispatchEvent(new Event("open-contact-modal"))
+      return
+    }
     if (href.startsWith("#")) {
       document.querySelector(href)?.scrollIntoView({ behavior: "smooth" })
     } else {

@@ -25,7 +25,7 @@ export function Contact() {
                 rx="180"
                 ry={20 + i * 18}
                 fill="none"
-                stroke="url(#blueGradient)"
+                stroke="url(#brownGradient)"
                 strokeWidth="0.3"
                 transform={`rotate(${i * 18} 200 200)`}
                 opacity="0.4"
@@ -40,7 +40,7 @@ export function Contact() {
                 rx="180"
                 ry="180"
                 fill="none"
-                stroke="url(#blueGradient)"
+                stroke="url(#brownGradient)"
                 strokeWidth="0.3"
                 transform={`rotate(${i * 11.25} 200 200)`}
                 opacity="0.3"
@@ -52,7 +52,7 @@ export function Contact() {
               cy="200"
               r="180"
               fill="none"
-              stroke="url(#blueGradient)"
+              stroke="url(#brownGradient)"
               strokeWidth="0.5"
               opacity="0.5"
             />
@@ -68,15 +68,15 @@ export function Contact() {
                   cx={x}
                   cy={y}
                   r="1.5"
-                  fill="#3b82f6"
+                  fill="#c68a53"
                   opacity="0.6"
                 />
               )
             })}
             <defs>
-              <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3b82f6" />
-                <stop offset="100%" stopColor="#22d3ee" />
+              <linearGradient id="brownGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#c68a53" />
+                <stop offset="100%" stopColor="#8c5a35" />
               </linearGradient>
             </defs>
           </svg>
@@ -107,9 +107,9 @@ export function Contact() {
             <Button
               asChild
               size="lg"
-              className="bg-[#262626] hover:bg-[#333333] text-white rounded-full px-8 py-6 text-base font-medium"
+              className="bg-[#262626] hover:bg-[#333333] text-white rounded-full px-8 py-6 text-base font-medium cursor-pointer"
             >
-              <a href="mailto:hello@jalakpalan.me" className="flex items-center gap-2">
+              <a onClick={(e) => { e.preventDefault(); window.dispatchEvent(new Event('open-contact-modal')); }} className="flex items-center gap-2">
                 Get in Touch
                 <ArrowRight className="w-4 h-4" />
               </a>
