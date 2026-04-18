@@ -1,25 +1,32 @@
+import dynamic from "next/dynamic"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
-import { About } from "@/components/about"
-import { Skills } from "@/components/skills"
-import { Marquee } from "@/components/marquee"
-import { Journey } from "@/components/journey"
-import { Technologies } from "@/components/technologies"
-import { Projects } from "@/components/projects"
-import { Contact } from "@/components/contact"
-import { Footer } from "@/components/footer"
+import { InitialLoader } from "@/components/initial-loader"
+
+// Lazy-load all below-the-fold sections to improve LCP and reduce initial JS bundle
+const About        = dynamic(() => import("@/components/about").then(m => ({ default: m.About })))
+const Expertise    = dynamic(() => import("@/components/expertise").then(m => ({ default: m.Expertise })))
+const Marquee      = dynamic(() => import("@/components/marquee").then(m => ({ default: m.Marquee })))
+const Journey      = dynamic(() => import("@/components/journey").then(m => ({ default: m.Journey })))
+const Technologies = dynamic(() => import("@/components/technologies").then(m => ({ default: m.Technologies })))
+const Projects     = dynamic(() => import("@/components/projects").then(m => ({ default: m.Projects })))
+const Certificates = dynamic(() => import("@/components/certificates").then(m => ({ default: m.Certificates })))
+const Contact      = dynamic(() => import("@/components/contact").then(m => ({ default: m.Contact })))
+const Footer       = dynamic(() => import("@/components/footer").then(m => ({ default: m.Footer })))
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
+      <InitialLoader />
       <Navbar />
       <Hero />
       <About />
-      <Skills />
+      <Expertise />
       <Marquee />
       <Journey />
       <Technologies />
       <Projects />
+      <Certificates />
       <Contact />
       <Footer />
     </main>

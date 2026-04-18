@@ -5,13 +5,16 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Home, User, Code2, Briefcase, Mail, ChevronDown, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CommandPalette } from "./command-palette"
+import { Playfair_Display } from "next/font/google"
+
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["800"], style: ["italic"] })
 
 const navLinks = [
-  { name: "Home", href: "#home", icon: Home },
-  { name: "About", href: "#about", icon: User, hasDropdown: true },
-  { name: "Skills", href: "#skills", icon: Code2 },
-  { name: "Work", href: "#projects", icon: Briefcase },
-  { name: "Contact", href: "#contact", icon: Mail },
+  { name: "Home", href: "#home", icon: Home, iconColor: "text-purple-500" },
+  { name: "About", href: "#about", icon: User, hasDropdown: true, iconColor: "text-blue-500" },
+  { name: "Skills", href: "#skills", icon: Code2, iconColor: "text-pink-500" },
+  { name: "Work", href: "#projects", icon: Briefcase, iconColor: "text-orange-500" },
+  { name: "Contact", href: "#contact", icon: Mail, iconColor: "text-green-500" },
 ]
 
 export function Navbar() {
@@ -63,38 +66,40 @@ export function Navbar() {
           {/* Logo */}
           <motion.a
             href="#home"
-            className="relative z-10"
+            className="relative z-10 flex items-center"
             whileHover={{ scale: 1.05 }}
           >
-            <svg viewBox="0 0 50 50" className="w-12 h-12" fill="none">
-              <text x="5" y="38" className="text-3xl font-bold italic fill-white" style={{ fontFamily: 'serif' }}>
-                RB
-              </text>
-            </svg>
+            <div className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+              <span className={`text-2xl font-extrabold tracking-tight text-white ${playfair.className}`}>
+                JP
+              </span>
+            </div>
           </motion.a>
 
           {/* Desktop Navigation - Centered pill */}
           <div className="hidden md:flex items-center">
-            <div className="flex items-center gap-1 bg-[#1a1a1a]/80 backdrop-blur-xl rounded-full px-2 py-2 border border-[#262626]">
-              {navLinks.map((link) => {
-                const Icon = link.icon
-                const isActive = activeSection === link.href.replace("#", "")
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-                      isActive 
-                        ? "bg-[#262626] text-white" 
-                        : "text-[#a3a3a3] hover:text-white"
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span className="text-sm">{link.name}</span>
-                    {link.hasDropdown && <ChevronDown className="w-3 h-3" />}
-                  </a>
-                )
-              })}
+            <div className="p-[1px] bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-full shadow-[0_0_15px_rgba(236,72,153,0.3)]">
+              <div className="flex items-center gap-1 bg-[#1a1a1a]/95 backdrop-blur-xl rounded-full px-2 py-2">
+                {navLinks.map((link) => {
+                  const Icon = link.icon
+                  const isActive = activeSection === link.href.replace("#", "")
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
+                        isActive 
+                          ? "bg-[#262626] text-white shadow-inner" 
+                          : "text-[#a3a3a3] hover:text-white hover:bg-[#262626]/50"
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 transition-colors ${isActive ? "text-white" : link.iconColor}`} />
+                      <span className="text-sm font-medium">{link.name}</span>
+                      {link.hasDropdown && <ChevronDown className="w-3 h-3" />}
+                    </a>
+                  )
+                })}
+              </div>
             </div>
           </div>
 
@@ -171,7 +176,7 @@ export function Navbar() {
       </button>
 
       {/* Chat button - Fixed bottom right */}
-      <button className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-[#1a1a1a]/80 backdrop-blur-xl border border-[#262626] rounded-full flex items-center justify-center text-[#a3a3a3] hover:text-white transition-colors">
+      <button className="fixed bottom-6 right-6 z-50 w-11 h-11 bg-[#1a1a1a]/80 backdrop-blur-xl border border-[#262626] rounded-full flex items-center justify-center text-[#a3a3a3] hover:text-white transition-colors">
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>

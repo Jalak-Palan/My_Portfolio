@@ -20,9 +20,9 @@ const commands = [
 ]
 
 const socialLinks = [
-  { name: "GitHub", href: "https://github.com/rameshwarbhagwat", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com/in/rameshwarbhagwat", icon: Linkedin },
-  { name: "Twitter", href: "https://twitter.com/rameshwarbhagwat", icon: Twitter },
+  { name: "GitHub", href: "https://github.com/jalakpalan", icon: Github },
+  { name: "LinkedIn", href: "https://linkedin.com/in/jalakpalan", icon: Linkedin },
+  { name: "Twitter", href: "https://twitter.com/jalakpalan", icon: Twitter },
 ]
 
 interface CommandPaletteProps {

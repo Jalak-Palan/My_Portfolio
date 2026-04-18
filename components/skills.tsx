@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState } from "react"
 import { Code2, Palette, MessageSquare, ChevronDown, ChevronUp, Check, Clock, Target } from "lucide-react"
+import { ShapeBlur } from "./ui/shape-blur"
 
 const services = [
   {
@@ -53,7 +54,19 @@ export function Skills() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null)
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden">
+    <section id="skills" className="py-24 relative overflow-hidden bg-[#0a0a0a]">
+      {/* Interactive Background Effect */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <ShapeBlur 
+          variation={0}
+          shapeSize={1.5}
+          roundness={0.5}
+          borderSize={0.04}
+          circleSize={0.3}
+          circleEdge={0.5}
+        />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

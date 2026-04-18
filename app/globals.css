@@ -58,9 +58,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     scroll-behavior: smooth;
   }
@@ -93,6 +95,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -102,31 +105,37 @@
   animation: rotate-globe 60s linear infinite;
 }
 
-/* Marquee animation */
+/* Marquee animation — GPU-accelerated via translate3d */
 @keyframes marquee {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
+
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes marquee-reverse {
   0% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
+
   100% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .animate-marquee-reverse {
   animation: marquee-reverse 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 /* Glow effects */
@@ -143,48 +152,58 @@
   background: linear-gradient(180deg, #f97316 0%, #f43f5e 100%);
 }
 
-/* Card hover effect */
+/* Card hover effect — GPU-accelerated */
 .card-hover {
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
 }
 
 .card-hover:hover {
-  transform: translateY(-4px);
+  transform: translate3d(0, -4px, 0);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Tech icon scroll */
+/* Tech icon scroll — GPU-accelerated */
 @keyframes scroll-left {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
+
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes scroll-right {
   0% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
+
   100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-scroll-left {
   animation: scroll-left 20s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .animate-scroll-right {
   animation: scroll-right 20s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 /* Pulse animation for timeline dots */
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(249, 115, 22, 0.8);
   }

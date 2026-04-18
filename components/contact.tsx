@@ -60,8 +60,8 @@ export function Contact() {
             {[...Array(30)].map((_, i) => {
               const angle = (i / 30) * Math.PI * 2
               const radius = 180
-              const x = 200 + Math.cos(angle) * radius
-              const y = 200 + Math.sin(angle) * radius
+              const x = (200 + Math.cos(angle) * radius).toFixed(3)
+              const y = (200 + Math.sin(angle) * radius).toFixed(3)
               return (
                 <circle
                   key={`dot-${i}`}
@@ -109,7 +109,7 @@ export function Contact() {
               size="lg"
               className="bg-[#262626] hover:bg-[#333333] text-white rounded-full px-8 py-6 text-base font-medium"
             >
-              <a href="mailto:hello@rameshwarbhagwat.me" className="flex items-center gap-2">
+              <a href="mailto:hello@jalakpalan.me" className="flex items-center gap-2">
                 Get in Touch
                 <ArrowRight className="w-4 h-4" />
               </a>

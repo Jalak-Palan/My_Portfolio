@@ -1,94 +1,109 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
+import { 
+  Database, 
+  Server, 
+  Box, 
+  GitBranch, 
+  Github, 
+  Cpu, 
+  Globe, 
+  Layers, 
+  Zap, 
+  Code2, 
+  Cloud, 
+  Terminal,
+  FileCode2,
+  Lock,
+  Workflow,
+  Sparkles,
+  Search,
+  MessageSquare
+} from "lucide-react"
 
-const techRow1 = [
-  { name: "React", color: "#61DAFB" },
-  { name: "Next.js", color: "#ffffff" },
-  { name: "TypeScript", color: "#3178C6" },
-  { name: "JavaScript", color: "#F7DF1E" },
-  { name: "Python", color: "#3776AB" },
-  { name: "Node.js", color: "#339933" },
-  { name: "Express", color: "#ffffff" },
-  { name: "MongoDB", color: "#47A248" },
-  { name: "PostgreSQL", color: "#4169E1" },
-  { name: "Tailwind", color: "#06B6D4" },
+const technologies = [
+  { name: "ReactJS", icon: <Layers className="w-4 h-4 text-[#61DAFB]" /> },
+  { name: "NextJS", icon: <Zap className="w-4 h-4 text-white" /> },
+  { name: "TypeScript", icon: <FileCode2 className="w-4 h-4 text-[#3178C6]" /> },
+  { name: "Tailwind CSS", icon: <Globe className="w-4 h-4 text-[#06B6D4]" /> },
+  { name: "Motion", icon: <Sparkles className="w-4 h-4 text-[#FF0055]" /> },
+  { name: "Sanity", icon: <Search className="w-4 h-4 text-[#F03E2F]" /> },
+  { name: "Contentful", icon: <Database className="w-4 h-4 text-[#2478CC]" /> },
+  { name: "NodeJS", icon: <Server className="w-4 h-4 text-[#339933]" /> },
+  { name: "ExpressJS", icon: <Terminal className="w-4 h-4 text-white" /> },
+  { name: "PostgreSQL", icon: <Database className="w-4 h-4 text-[#4169E1]" /> },
+  { name: "MongoDB", icon: <Database className="w-4 h-4 text-[#47A248]" /> },
+  { name: "Prisma", icon: <Layers className="w-4 h-4 text-[#2D3748]" /> },
+  { name: "Zustand", icon: <Layers className="w-4 h-4 text-[#443E38]" /> },
+  { name: "Zod", icon: <Lock className="w-4 h-4 text-[#3068B7]" /> },
+  { name: "pnpm", icon: <Box className="w-4 h-4 text-[#F69220]" /> },
+  { name: "Bun", icon: <Zap className="w-4 h-4 text-[#fbf0df]" /> },
+  { name: "Git", icon: <GitBranch className="w-4 h-4 text-[#F05032]" /> },
+  { name: "GitHub", icon: <Github className="w-4 h-4 text-white" /> },
+  { name: "Vercel", icon: <Globe className="w-4 h-4 text-white" /> },
+  { name: "AWS", icon: <Cloud className="w-4 h-4 text-[#FF9900]" /> },
+  { name: "Docker", icon: <Box className="w-4 h-4 text-[#2496ED]" /> },
+  { name: "Expo", icon: <Layers className="w-4 h-4 text-white" /> },
+  { name: "Clerk", icon: <Lock className="w-4 h-4 text-[#6C47FF]" /> },
+  { name: "Linux", icon: <Terminal className="w-4 h-4 text-white" /> },
 ]
-
-const techRow2 = [
-  { name: "Docker", color: "#2496ED" },
-  { name: "AWS", color: "#FF9900" },
-  { name: "Vercel", color: "#ffffff" },
-  { name: "Git", color: "#F05032" },
-  { name: "GitHub", color: "#ffffff" },
-  { name: "Prisma", color: "#2D3748" },
-  { name: "Firebase", color: "#FFCA28" },
-  { name: "Redis", color: "#DC382D" },
-  { name: "GraphQL", color: "#E10098" },
-  { name: "Framer", color: "#0055FF" },
-]
-
-function TechRow({ items, reverse = false }: { items: typeof techRow1; reverse?: boolean }) {
-  return (
-    <div className="flex overflow-hidden py-3">
-      <div className={`flex gap-4 ${reverse ? "animate-scroll-right" : "animate-scroll-left"}`}>
-        {[...items, ...items, ...items, ...items].map((tech, i) => (
-          <div
-            key={i}
-            className="flex items-center gap-2 px-4 py-2 bg-[#141414] border border-[#262626] rounded-lg hover:border-[#404040] transition-all whitespace-nowrap"
-          >
-            <div 
-              className="w-2 h-2 rounded-full" 
-              style={{ backgroundColor: tech.color }}
-            />
-            <span className="text-[#a3a3a3] text-sm">{tech.name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
 
 export function Technologies() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-96 h-96 bg-[#f97316]/10 rounded-full blur-3xl" />
-      </div>
+    <section className="py-32 relative overflow-hidden bg-[#050505]">
+      {/* Background radial glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-12" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <span className="text-[#f43f5e] text-sm uppercase tracking-[0.3em] mb-4 block">My Arsenal</span>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            <span className="text-[#525252]">TECHNOLOGIES </span>
-            <span className="gradient-text-rainbow">I MASTER</span>
-          </h2>
-          <p className="text-[#737373] text-lg max-w-2xl mx-auto">
-            Building modern web experiences with cutting-edge tools and frameworks
-          </p>
-        </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        
+        {/* Heading Section */}
+        <div className="mb-20">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-zinc-500 text-sm font-bold tracking-[0.4em] uppercase mb-4 block"
+          >
+            My Skillset
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-black text-white tracking-tight"
+          >
+            The Magic <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-fuchsia-400 bg-clip-text text-transparent">Behind</span>
+          </motion.h2>
+        </div>
+
+        {/* Tech Pills Grid */}
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-5xl mx-auto">
+          {technologies.map((tech, i) => (
+            <motion.div
+              key={tech.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.02 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              className="flex items-center gap-2.5 px-5 py-2.5 bg-[#121212] hover:bg-[#181818] border border-white/5 hover:border-white/10 rounded-xl transition-all duration-300 text-sm font-medium text-zinc-300 group shadow-lg"
+            >
+              <span className="opacity-70 group-hover:opacity-100 transition-opacity">
+                {tech.icon}
+              </span>
+              <span>{tech.name}</span>
+            </motion.div>
+          ))}
+        </div>
+
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="space-y-2"
-      >
-        <TechRow items={techRow1} />
-        <TechRow items={techRow2} reverse />
-      </motion.div>
+      {/* Decorative side lines */}
+      <div className="absolute top-0 bottom-0 left-4 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none" />
+      <div className="absolute top-0 bottom-0 right-4 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none" />
     </section>
   )
 }

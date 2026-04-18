@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { NetworkGlobe } from "./network-globe"
 
 export function Hero() {
   return (
@@ -10,7 +11,7 @@ export function Hero() {
       {/* Background */}
       <div className="absolute inset-0 bg-[#0a0a0a]">
         {/* Subtle dot pattern */}
-        <div 
+        <div
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
@@ -19,77 +20,8 @@ export function Hero() {
         />
       </div>
 
-      {/* Globe wireframe - center */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="relative w-[600px] h-[600px] opacity-60">
-          {/* Globe circles */}
-          <svg viewBox="0 0 400 400" className="w-full h-full">
-            {/* Horizontal lines */}
-            {[...Array(8)].map((_, i) => (
-              <ellipse
-                key={`h-${i}`}
-                cx="200"
-                cy="200"
-                rx="180"
-                ry={30 + i * 20}
-                fill="none"
-                stroke="url(#orangeGradient)"
-                strokeWidth="0.5"
-                transform={`rotate(${i * 22.5} 200 200)`}
-                opacity="0.5"
-              />
-            ))}
-            {/* Vertical lines */}
-            {[...Array(12)].map((_, i) => (
-              <ellipse
-                key={`v-${i}`}
-                cx="200"
-                cy="200"
-                rx="180"
-                ry="180"
-                fill="none"
-                stroke="url(#orangeGradient)"
-                strokeWidth="0.5"
-                transform={`rotate(${i * 15} 200 200)`}
-                opacity="0.3"
-              />
-            ))}
-            {/* Main circle */}
-            <circle
-              cx="200"
-              cy="200"
-              r="180"
-              fill="none"
-              stroke="url(#orangeGradient)"
-              strokeWidth="1"
-              opacity="0.6"
-            />
-            {/* Glowing dots */}
-            {[...Array(20)].map((_, i) => {
-              const angle = (i / 20) * Math.PI * 2
-              const radius = 180
-              const x = 200 + Math.cos(angle) * radius
-              const y = 200 + Math.sin(angle) * radius
-              return (
-                <circle
-                  key={`dot-${i}`}
-                  cx={x}
-                  cy={y}
-                  r="2"
-                  fill="#f97316"
-                  opacity="0.8"
-                />
-              )
-            })}
-            <defs>
-              <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f97316" />
-                <stop offset="100%" stopColor="#f43f5e" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-      </div>
+      {/* 3D Network Globe Background */}
+      <NetworkGlobe />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center pt-20">
@@ -107,15 +39,15 @@ export function Hero() {
           >
             <span className="text-white">{"Hey, I'm"}</span>
           </motion.h1>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className="text-5xl sm:text-6xl lg:text-8xl font-bold mb-4"
           >
-            <span className="gradient-text">Rameshwar</span>
-            <span className="text-white"> Bhagwat</span>
+            <span className="gradient-text">Jalak</span>
+            <span className="text-white"> Palan</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -134,7 +66,7 @@ export function Hero() {
             animate={{ scaleX: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
             className="w-48 h-1 mx-auto mb-8"
-            style={{ background: 'linear-gradient(90deg, #f97316, #f43f5e)' }}
+            style={{ background: 'linear-gradient(90deg, #fbbf24, #f59e0b)' }}
           />
 
           {/* Tagline */}
@@ -184,11 +116,28 @@ export function Hero() {
           className="absolute bottom-0 w-full"
           preserveAspectRatio="none"
         >
+          {/* Outer glow */}
           <path
             d="M0,120 Q720,0 1440,120"
             fill="none"
-            stroke="rgba(255,255,255,0.1)"
-            strokeWidth="1"
+            stroke="rgba(255, 255, 255, 0.15)"
+            strokeWidth="15"
+            className="blur-md"
+          />
+          {/* Inner glow */}
+          <path
+            d="M0,120 Q720,0 1440,120"
+            fill="none"
+            stroke="rgba(255, 255, 255, 0.4)"
+            strokeWidth="8"
+            className="blur-sm"
+          />
+          {/* Core bright line */}
+          <path
+            d="M0,120 Q720,0 1440,120"
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="3"
           />
         </svg>
       </div>
