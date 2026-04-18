@@ -146,7 +146,7 @@ export function ChatBot() {
             {/* User requested icon to be their photo, let's make the open button their photo! */}
             <div className="w-full h-full rounded-full overflow-hidden p-0.5 border border-[#333] group-hover:border-[#f43f5e] transition-colors">
               <img 
-                src="https://avatars.githubusercontent.com/u/225344229?v=4" 
+                src="/jp-logo.png" 
                 alt="Chat Assistant" 
                 className="w-full h-full object-cover rounded-full"
               />
@@ -175,7 +175,7 @@ export function ChatBot() {
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 rounded-full border border-[#333] overflow-hidden bg-[#1a1a1a] flex items-center justify-center">
                   <img 
-                    src="https://avatars.githubusercontent.com/u/225344229?v=4" 
+                    src="/jp-logo.png" 
                     alt="AI Avatar" 
                     className="w-full h-full object-cover"
                   />
