@@ -129,15 +129,20 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <motion.a
-            href="#home"
-            onClick={(e) => scrollToSection(e, "#home")}
-            className="relative z-10 flex items-center"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+              window.history.pushState(null, "", "/");
+            }}
+            className="relative z-10 flex items-center cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
-              <span className={`text-2xl font-extrabold tracking-tight text-white ${playfair.className}`}>
-                JP
-              </span>
+            <div className="flex items-center justify-center w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden p-0.5">
+              <img 
+                src="/jp-logo.png" 
+                alt="JP Logo" 
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
           </motion.a>
 
