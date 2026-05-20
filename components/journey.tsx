@@ -1,279 +1,238 @@
 "use client"
 
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import { Award, BookOpen, GraduationCap, MapPin, Sparkles } from "lucide-react"
 
+// Clean and rich education milestones
 const milestones = [
-          {
-    year: "2022-2023",
+  {
+    step: "01",
+    year: "2022 - 2023",
     title: "Saraswati Schooling System",
     type: "Secondary School (SSC)",
-    board: "Gujarat Board",
-    location: "Rajkot, Gujarat",
-    description: "Completed my secondary education with a focus on core science and mathematics, laying the foundation for my technical career.",
-    side: "right"
-  },
-  {
-    year: "2024-2025",
-    title: "P.V Modi school",
-    type: "Higher Secondary school",
     board: "Gujarat Board (GSEB)",
     location: "Rajkot, Gujarat",
-    description: "Focused on higher secondary education with a specialized curriculum in Science, preparing for advanced engineering and technical studies.",
-    side: "left"
+    description: "Completed secondary schooling with an intensive focus on core mathematics and sciences, laying the structural analytical foundation for computational thinking.",
+    skills: ["Mathematics", "General Sciences", "Logical Reasoning"],
+    icon: BookOpen
   },
   {
-    year: "2025-2029",
-    title: "Swaminarayan University X Codinggita",
-    type: "B.E/B.Tech",
-    location: "Kalol, Gandhinagar, Gujarat",
-    description: "Pursuing a Bachelor of Engineering in Computer Science, combined with intensive industry-focused coding training at Codinggita to master late-stack software development.",
-    side: "right"
+    step: "02",
+    year: "2024 - 2025",
+    title: "P.V Modi School",
+    type: "Higher Secondary (HSC)",
+    board: "Gujarat Board (GSEB)",
+    location: "Rajkot, Gujarat",
+    description: "Focused on advanced Science and Mathematics. Developed strong problem-solving skills, algorithmic principles, and early programming logic.",
+    skills: ["Physics & Chem", "Calculus & Algebra", "Computing Basics"],
+    icon: Award
   },
+  {
+    step: "03",
+    year: "2025 - 2029",
+    title: "Swaminarayan University & Codinggita",
+    type: "B.Tech Computer Science",
+    board: "Integrated Professional Track",
+    location: "Kalol, Gandhinagar, Gujarat",
+    description: "Pursuing full-scale computer engineering integrated with intensive technical developer training at Codinggita to construct modern, scalable SaaS architectures.",
+    skills: ["Next.js & React", "Algorithms", "System Architecture", "Cloud Dev"],
+    icon: GraduationCap
+  }
 ]
+
+// Container staggered animations
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 90,
+      damping: 14
+    }
+  }
+}
 
 export function Journey() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  
-  const timelineRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start center", "end center"]
-  })
-
-  // High-stiffness spring = snappy, zero-lag tracking
-  const scaleY = useSpring(scrollYProgress, {
-    stiffness: 300,
-    damping: 40,
-    restDelta: 0.0005
-  })
-
-  // Move the dot indicator perfectly in sync with the spring-animated line
-  const dotPosition = useTransform(scaleY, [0, 1], ["0%", "100%"])
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <span className="text-[#f43f5e] text-sm uppercase tracking-[0.3em] mb-4 block">The Story So Far</span>
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter">
-            <span className="text-white">MY </span>
-            <span className="gradient-text-orange uppercase">Education Journey</span>
-          </h2>
-        </motion.div>
+    <section id="journey" className="py-24 relative overflow-hidden bg-background">
+      {/* Decorative Blur glows */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[350px] h-[350px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[90px] pointer-events-none" />
 
-        {/* Timeline Container */}
-        <div className="relative" ref={timelineRef}>
-          {/* Background Track - Thicker Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-white/10 rounded-full" />
-          
-          {/* Active Progress Line */}
-          <motion.div 
-            style={{ scaleY, transformOrigin: "top" }}
-            className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-gradient-to-b from-[#f97316] to-[#f43f5e] rounded-full"
-          />
+      {/* Grid Pattern Background overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05] pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(var(--foreground) 1px, transparent 1px)`,
+          backgroundSize: '24px 24px'
+        }}
+      />
 
-          {/* Moving Indicator - Dramatic Starburst & Arrow */}
-          <motion.div 
-            style={{ top: dotPosition }}
-            className="absolute left-1/2 -translate-x-1/2 z-20 -translate-y-1/2"
+      <div className="max-w-6xl mx-auto px-6 relative z-10" ref={ref}>
+        
+        {/* Modern Header */}
+        <div className="text-center mb-16 sm:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4"
           >
-            <div className="relative flex items-center justify-center">
-              {/* Central Intense Star Core */}
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.8, 1, 0.8],
-                }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className="absolute w-12 h-12 bg-white rounded-full blur-md z-30 opacity-50"
-              />
-              
-              {/* Massive Outer Glow */}
-              <motion.div
-                animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute w-32 h-32 bg-[#f97316] rounded-full blur-[60px] opacity-40"
-              />
-
-              {/* Light Rays / Starburst Beams */}
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={`ray-${i}`}
-                  initial={{ rotate: i * 30 }}
-                  className="absolute w-[2px] h-[60px] origin-bottom"
-                  style={{ bottom: "50%" }}
-                >
-                  <motion.div
-                    animate={{ 
-                      height: [40, 80, 40],
-                      opacity: [0.1, 0.4, 0.1]
-                    }}
-                    transition={{ 
-                      duration: 1.5 + (i % 3) * 0.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: i * 0.1
-                    }}
-                    className="w-full h-full bg-gradient-to-t from-[#f97316] to-transparent rounded-full"
-                  />
-                </motion.div>
-              ))}
-
-              {/* Stardust Particles */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={`particle-${i}`}
-                  animate={{ 
-                    x: [0, (i % 2 === 0 ? 1 : -1) * (20 + i * 5)],
-                    y: [0, (i < 4 ? 1 : -1) * (20 + i * 5)],
-                    scale: [0, 1, 0],
-                    opacity: [0, 1, 0]
-                  }}
-                  transition={{ 
-                    duration: 2 + (i % 2),
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                    ease: "easeOut"
-                  }}
-                  className="absolute w-1.5 h-1.5 bg-white rounded-full blur-[1px] shadow-[0_0_8px_white]"
-                />
-              ))}
-              
-              {/* Arrow Head Container */}
-              <div className="w-12 h-12 rounded-full bg-[#141414] border-2 border-[#f97316] shadow-[0_0_30px_rgba(249,115,22,0.8)] flex items-center justify-center relative overflow-hidden z-20">
-                {/* Intense Internal Spark */}
-                <motion.div
-                  animate={{ opacity: [0.3, 0.8, 0.3] }}
-                  transition={{ duration: 0.5, repeat: Infinity }}
-                  className="absolute inset-0 bg-[#f97316]/20"
-                />
-                
-                {/* Chevron */}
-                <svg className="w-6 h-6 text-white relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-              </div>
-            </div>
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-primary">
+              The Path of Excellence
+            </span>
           </motion.div>
 
-          {/* Milestones */}
-          <div className="space-y-24 py-10">
-            {milestones.map((milestone, i) => (
-              <motion.div
-                key={milestone.year}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.15 * i }}
-                className="relative"
-              >
-                {/* Fixed Center dot for each milestone */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-3 h-3 rounded-full bg-[#262626] border-2 border-[#141414]" />
-                </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4"
+          >
+            My Education <span className="gradient-text">Journey</span>
+          </motion.h2>
 
-                {/* Content card */}
-                <div className={`flex ${milestone.side === "left" ? "justify-start" : "justify-end"}`}>
-                  <div className={`w-[45%] ${milestone.side === "left" ? "pr-8 text-left" : "pl-8 text-left"}`}>
-                    <div className="bg-[#141414] border border-[#262626] rounded-2xl p-8 sm:p-10 card-hover relative overflow-hidden group min-h-[250px] flex flex-col justify-center items-start">
-                      {/* Decorative background glow for 'big box' feel */}
-                      <div className="absolute -top-10 -right-10 w-48 h-48 bg-[#f97316]/5 blur-3xl rounded-full group-hover:bg-[#f97316]/10 transition-colors" />
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto"
+          >
+            A chronological timeline of my academic development, technical specializations, and professional training.
+          </motion.p>
+        </div>
+
+        {/* Stepper Timeline Container */}
+        <div className="relative mt-8 sm:mt-12">
+          
+          {/* Connecting Line: Desktop (Horizontal) */}
+          <div className="absolute top-[48px] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-primary/30 via-accent/30 to-primary/10 hidden md:block z-0" />
+          
+          {/* Connecting Line: Mobile/Tablet (Vertical) */}
+          <div className="absolute top-12 bottom-12 left-[31px] w-[2px] bg-gradient-to-b from-primary/30 via-accent/30 to-primary/10 block md:hidden z-0" />
+
+          {/* Milestone Cards Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10"
+          >
+            {milestones.map((milestone, idx) => {
+              const IconComponent = milestone.icon
+
+              return (
+                <motion.div
+                  key={idx}
+                  variants={cardVariants}
+                  className="relative flex flex-col md:flex-col gap-6 md:gap-0"
+                >
+                  
+                  {/* Step Stepper Header (Number & Icon) */}
+                  <div className="flex md:flex-col items-center gap-4 md:gap-3 z-10 md:mb-6 shrink-0 md:w-auto">
+                    
+                    {/* Stepper Dot */}
+                    <div className="w-16 h-16 rounded-full bg-card border border-border/80 shadow-lg flex items-center justify-center relative group-hover:border-primary transition-colors duration-300">
+                      {/* Pulse Glow for active/last step */}
+                      {idx === milestones.length - 1 && (
+                        <span className="absolute inset-0 rounded-full bg-primary/20 animate-ping pointer-events-none" />
+                      )}
                       
-                      <div className="flex flex-col gap-6 relative z-10">
-                        <div className="flex flex-wrap items-center justify-between gap-3">
-                          <span className="inline-block px-4 py-1.5 text-[11px] font-black bg-[#f97316]/10 text-[#f97316] rounded-full border border-[#f97316]/10 uppercase tracking-widest">
-                            {milestone.year}
-                          </span>
-                          {(milestone.type || milestone.board) && (
-                            <div className="flex gap-2">
-                              {milestone.type && (
-                                <span className="text-[12px] font-bold bg-white/5 text-white/70 px-3 py-1 rounded border border-white/5 uppercase tracking-tight">
-                                  {milestone.type}
-                                </span>
-                              )}
-                              {milestone.board && (
-                                <span className="text-[12px] font-bold bg-[#f97316]/5 text-[#f97316]/90 px-3 py-1 rounded border border-[#f97316]/10 uppercase tracking-tight">
-                                  {milestone.board}
-                                </span>
-                              )}
-                            </div>
-                          )}
-                        </div>
-
-                        <div>
-                          <h3 className="text-2xl sm:text-3xl font-black gradient-text-orange mb-3 leading-tight tracking-tight">
-                            {milestone.title}
-                          </h3>
-                          {milestone.location && (
-                            <div className="flex items-center gap-1.5 text-[#a3a3a3] text-sm font-bold">
-                              <svg className="w-4 h-4 text-[#f97316]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                              </svg>
-                              {milestone.location}
-                            </div>
-                          )}
-                        </div>
-
-                        <p className="text-[#d4d4d4] text-sm sm:text-base leading-relaxed font-medium">
-                          {milestone.description}
-                        </p>
+                      <div className="w-12 h-12 rounded-full bg-secondary/80 flex items-center justify-center text-primary">
+                        <IconComponent className="w-5 h-5" />
                       </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
 
-          {/* Bottom Terminal Glow point & Final Explosion */}
-          <div className="absolute left-1/2 bottom-0 -translate-x-1/2 z-10 flex items-center justify-center">
-            {/* The terminal dot */}
-            <div className="w-4 h-4 rounded-full bg-[#f43f5e] glow-pink relative z-20" />
-            
-            {/* Explosive Spark that triggers on reach */}
-            <motion.div 
-              style={{ 
-                opacity: useTransform(scaleY, [0.98, 1], [0, 1]),
-                scale: useTransform(scaleY, [0.98, 1], [0.5, 1.5])
-              }}
-              className="absolute pointer-events-none"
-            >
-              {/* Giant burst */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[#f43f5e] rounded-full blur-[40px] opacity-60" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-full blur-[20px] opacity-80" />
-              
-              {/* Radial rays */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={`end-ray-${i}`}
-                  initial={{ rotate: i * 45 }}
-                  className="absolute w-[2px] h-[80px] origin-bottom top-1/2 left-1/2 -translate-x-1/2 -translate-y-full"
-                >
-                  <motion.div
-                    animate={{ 
-                      height: [40, 120, 40],
-                      opacity: [0.2, 0.8, 0.2]
-                    }}
-                    transition={{ 
-                      duration: 1 + (i % 2) * 0.5,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    className="w-full h-full bg-gradient-to-t from-[#f43f5e] via-white to-transparent rounded-full"
-                  />
+                    {/* Step tag */}
+                    <div className="flex flex-col md:items-center">
+                      <span className="text-[10px] font-mono tracking-widest text-muted-foreground uppercase leading-none">
+                        STEP {milestone.step}
+                      </span>
+                      <span className="text-xs font-mono font-bold text-primary mt-1 md:mt-0.5">
+                        {milestone.year}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Stepper Body Card */}
+                  <div className="flex-grow pl-10 md:pl-0">
+                    <div className="h-full bg-card/30 backdrop-blur-md border border-border/80 rounded-2xl p-6 shadow-md shadow-black/5 hover:shadow-xl hover:border-primary/50 transition-all duration-300 relative group overflow-hidden flex flex-col justify-between">
+                      
+                      {/* Gradient Ambient Overlay */}
+                      <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors pointer-events-none" />
+
+                      <div className="flex flex-col">
+                        
+                        {/* Header metadata */}
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                          <span className="text-[11px] font-mono bg-secondary border border-border/50 text-foreground/80 px-2.5 py-0.5 rounded-md font-semibold">
+                            {milestone.type}
+                          </span>
+                          <span className="text-[10px] font-mono text-muted-foreground font-medium">
+                            {milestone.board}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground group-hover:gradient-text transition-all duration-300 mb-2 leading-tight">
+                          {milestone.title}
+                        </h3>
+
+                        {/* Location */}
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-4">
+                          <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                          <span>{milestone.location}</span>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-muted-foreground text-xs leading-relaxed mb-6">
+                          {milestone.description}
+                        </p>
+
+                      </div>
+
+                      {/* Technical Tags footer */}
+                      <div className="border-t border-border/40 pt-4 mt-auto">
+                        <div className="flex flex-wrap gap-1.5">
+                          {milestone.skills.map((skill, sIdx) => (
+                            <span
+                              key={sIdx}
+                              className="px-2 py-0.5 rounded text-[10px] font-mono border border-border bg-secondary/50 text-foreground/80"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
                 </motion.div>
-              ))}
-            </motion.div>
-          </div>
+              )
+            })}
+          </motion.div>
+
         </div>
+
       </div>
     </section>
   )
